@@ -5,34 +5,34 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 
-//ƒQ[ƒ€ƒI[ƒo[‚Ìƒ^ƒCƒgƒ‹‚Ö–ß‚éƒ{ƒ^ƒ“
-//Œø‰Ê‰¹AƒXƒRƒA•\¦i‰æ–ÊŠÇ—j‚à‚±‚±‚Å
+//ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼æ™‚ã®ã‚¿ã‚¤ãƒˆãƒ«ã¸æˆ»ã‚‹ãƒœã‚¿ãƒ³
+//åŠ¹æœéŸ³ã€ã‚¹ã‚³ã‚¢è¡¨ç¤ºï¼ˆç”»é¢ç®¡ç†ï¼‰ã‚‚ã“ã“ã§
 public class GameOverDirector : MonoBehaviour, IPointerClickHandler
 {
-    GameObject scoreText; //Šl“¾‚µ‚½ƒXƒRƒA‚ğ•\¦‚·‚éƒeƒLƒXƒgUI
+    GameObject scoreText; //ç²å¾—ã—ãŸã‚¹ã‚³ã‚¢ã‚’è¡¨ç¤ºã™ã‚‹ãƒ†ã‚­ã‚¹ãƒˆUI
 
-    //ƒnƒCƒXƒRƒA
+    //ãƒã‚¤ã‚¹ã‚³ã‚¢
     int highScore1; 
     int highScore2;
     int highScore3;
 
-    //ƒQ[ƒ€ƒI[ƒo[Œø‰Ê‰¹—p‚Ì•Ï”
-    [SerializeField] AudioSource seAudioSource;
-    [SerializeField] public AudioClip gameoverSE;
+    //ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼åŠ¹æœéŸ³ç”¨ã®å¤‰æ•°
+    [SerializeField] AudioSource seAudioSource; //ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªã‚½ãƒ¼ã‚¹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
+    [SerializeField] public AudioClip gameoverSE; //ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼SE
 
     // Start is called before the first frame update
     void Start()
     {
-        //Šl“¾ƒXƒRƒA•\¦
+        //ç²å¾—ã‚¹ã‚³ã‚¢è¡¨ç¤º
         this.scoreText = GameObject.Find("Score");
-        this.scoreText.GetComponent<TextMeshProUGUI>().text = "ƒXƒRƒA: " + GameDirector.score.ToString("D");
+        this.scoreText.GetComponent<TextMeshProUGUI>().text = "ã‚¹ã‚³ã‚¢: " + GameDirector.score.ToString("D");
 
-        //ƒnƒCƒXƒRƒA(ãˆÊ3‚Â)•\¦
+        //ãƒã‚¤ã‚¹ã‚³ã‚¢(ä¸Šä½3ã¤)è¡¨ç¤º
         this.highScore1 = PlayerPrefs.GetInt("HIGHSCORE1");
         this.highScore2 = PlayerPrefs.GetInt("HIGHSCORE2");
         this.highScore3 = PlayerPrefs.GetInt("HIGHSCORE3");
 
-        //ƒnƒCƒXƒRƒAXV
+        //ãƒã‚¤ã‚¹ã‚³ã‚¢æ›´æ–°
         if (GameDirector.score > this.highScore1)
         {
             this.highScore3 = this.highScore2;
@@ -60,11 +60,11 @@ public class GameOverDirector : MonoBehaviour, IPointerClickHandler
             PlayerPrefs.Save();
         }
 
-        //Œø‰Ê‰¹
+        //åŠ¹æœéŸ³
         seAudioSource.PlayOneShot(gameoverSE);
     }
 
-    //ƒ{ƒ^ƒ“ƒ^ƒbƒv‚Åƒ^ƒCƒgƒ‹‚Ö
+    //ãƒœã‚¿ãƒ³ã‚¿ãƒƒãƒ—ã§ã‚¿ã‚¤ãƒˆãƒ«ã¸
     public void OnPointerClick(PointerEventData eventData)
     {
         SceneManager.LoadScene("TitleScene");
