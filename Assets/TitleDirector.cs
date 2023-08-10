@@ -5,12 +5,12 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 
-//ƒXƒ^[ƒgƒ{ƒ^ƒ“(ƒ^ƒbƒv‚ÅƒXƒ^[ƒg)
-//ƒ^ƒCƒgƒ‹‰æ–Ê‚Ì§Œä‚à
-//(ƒnƒCƒXƒRƒA(ãˆÊ3‚Â)‚Ì•\¦ABGM)
+//ã‚¹ã‚¿ãƒ¼ãƒˆãƒœã‚¿ãƒ³(ã‚¿ãƒƒãƒ—ã§ã‚¹ã‚¿ãƒ¼ãƒˆ)
+//ã‚¿ã‚¤ãƒˆãƒ«ç”»é¢ã®åˆ¶å¾¡ã‚‚
+//(ãƒã‚¤ã‚¹ã‚³ã‚¢(ä¸Šä½3ã¤)ã®è¡¨ç¤ºã€BGM)
 public class TitleDirector : MonoBehaviour, IPointerClickHandler
 {
-    //ƒnƒCƒXƒRƒA•\¦—p‚ÌUIƒeƒLƒXƒg‚Æ•Ï”
+    //ãƒã‚¤ã‚¹ã‚³ã‚¢è¡¨ç¤ºç”¨ã®UIãƒ†ã‚­ã‚¹ãƒˆã¨å¤‰æ•°
     int highScore1;
     int highScore2;
     int highScore3;
@@ -18,12 +18,12 @@ public class TitleDirector : MonoBehaviour, IPointerClickHandler
     GameObject highScoreText2;
     GameObject highScoreText3;
 
-    [SerializeField] AudioSource titleAudioSource;
+    [SerializeField] AudioSource titleAudioSource; //ã‚¿ã‚¤ãƒˆãƒ«BGMç”¨ã®ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªã‚½ãƒ¼ã‚¹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
 
     // Start is called before the first frame update
     void Start()
     {
-        //ƒnƒCƒXƒRƒA‹L˜^‚ª–³‚¯‚ê‚Î‰Šú’l‚ğ“o˜^
+        //ãƒã‚¤ã‚¹ã‚³ã‚¢è¨˜éŒ²ãŒç„¡ã‘ã‚Œã°åˆæœŸå€¤ã‚’ç™»éŒ²
         if (!PlayerPrefs.HasKey("HIGHSCORE1"))
         {
             PlayerPrefs.SetInt("HIGHSCORE1", 5000);
@@ -45,7 +45,7 @@ public class TitleDirector : MonoBehaviour, IPointerClickHandler
         }
         this.highScore3 = PlayerPrefs.GetInt("HIGHSCORE3");
 
-        //ƒnƒCƒXƒRƒA•\¦
+        //ãƒã‚¤ã‚¹ã‚³ã‚¢è¡¨ç¤º
         this.highScoreText1 = GameObject.Find("HighScore1");
         this.highScoreText1.GetComponent<TextMeshProUGUI>().text = "1st: " + highScore1.ToString("D");
 
@@ -55,16 +55,16 @@ public class TitleDirector : MonoBehaviour, IPointerClickHandler
         this.highScoreText3 = GameObject.Find("HighScore3");
         this.highScoreText3.GetComponent<TextMeshProUGUI>().text = "3rd: " + highScore3.ToString("D");
 
-        //ƒ^ƒCƒgƒ‹BGMƒXƒ^[ƒg
+        //ã‚¿ã‚¤ãƒˆãƒ«BGMã‚¹ã‚¿ãƒ¼ãƒˆ
         titleAudioSource.Play();
     }
 
-    //ƒ{ƒ^ƒ“ƒ^ƒbƒv‚ÅƒQ[ƒ€ƒXƒ^[ƒg
+    //ãƒœã‚¿ãƒ³ã‚¿ãƒƒãƒ—ã§ã‚²ãƒ¼ãƒ ã‚¹ã‚¿ãƒ¼ãƒˆ
     public void OnPointerClick(PointerEventData eventData)
     {
-        //ƒ^ƒCƒgƒ‹BGM’â~
+        //ã‚¿ã‚¤ãƒˆãƒ«BGMåœæ­¢
         titleAudioSource.Stop();
-        //ƒQ[ƒ€‰æ–Ê‚Ö
+        //ã‚²ãƒ¼ãƒ ç”»é¢ã¸
         SceneManager.LoadScene("GameScene");
     }
 }
