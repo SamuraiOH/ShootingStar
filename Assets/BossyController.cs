@@ -3,56 +3,56 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-//ƒvƒŒƒCƒ„[‚ğƒXƒƒCƒv‚Å“®‚©‚·ƒXƒNƒŠƒvƒg
-//ƒXƒƒCƒv‚·‚é‚Æ‚»‚Ì•ûŒü‚É“®‚«‘±‚¯‚é
-//“–‚½‚è”»’è‚Æ‚»‚ê‚É”º‚¤Œø‰Ê‰¹‚à‚±‚±‚Åˆ—
+//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’ã‚¹ãƒ¯ã‚¤ãƒ—ã§å‹•ã‹ã™ã‚¹ã‚¯ãƒªãƒ—ãƒˆ
+//ã‚¹ãƒ¯ã‚¤ãƒ—ã™ã‚‹ã¨ãã®æ–¹å‘ã«å‹•ãç¶šã‘ã‚‹
+//å½“ãŸã‚Šåˆ¤å®šã¨ãã‚Œã«ä¼´ã†åŠ¹æœéŸ³ã‚‚ã“ã“ã§å‡¦ç†
 public class BossyController : MonoBehaviour
 {
-    enum Direction //ƒvƒŒƒCƒ„[‚ÌˆÚ“®•ûŒü‚ğ•\‚·—ñ‹“Œ^
+    enum Direction //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç§»å‹•æ–¹å‘ã‚’è¡¨ã™åˆ—æŒ™å‹
     {
-        Stop, //’â~
-        Up, //ã
-        Down, //‰º
-        Left, //¶(Œã‘Ş)
-        Right //‰E(‘Oi)
+        Stop, //åœæ­¢
+        Up, //ä¸Š
+        Down, //ä¸‹
+        Left, //å·¦(å¾Œé€€)
+        Right //å³(å‰é€²)
     }
 
-    enum State //ƒvƒŒƒCƒ„[‚Ìó‘Ô
+    enum State //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®çŠ¶æ…‹
     {
-        Normal, //’Êí
-        DamageInvincible, //ƒ_ƒ[ƒW‚Ì–³“Gó‘Ô
-        BarrierInvincible //ƒAƒCƒeƒ€‚É‚æ‚é–³“Gó‘Ô
+        Normal, //é€šå¸¸
+        DamageInvincible, //ãƒ€ãƒ¡ãƒ¼ã‚¸æ™‚ã®ç„¡æ•µçŠ¶æ…‹
+        BarrierInvincible //ã‚¢ã‚¤ãƒ†ãƒ ã«ã‚ˆã‚‹ç„¡æ•µçŠ¶æ…‹
     }
 
-    float speed; //ˆÚ“®ƒXƒs[ƒh
-    Vector2 startPos; //w‚ªG‚ê‚½À•W
-    Vector2 endPos; //w‚ª—£‚ê‚½À•W
-    Vector2 moveVector; //ƒXƒƒCƒv‚ÌƒxƒNƒgƒ‹
-    Direction direcction; //Œ»İ‚ÌƒvƒŒƒCƒ„[‚ÌˆÚ“®•ûŒü(‰Šú‚Í’â~)
-    State state; //ƒvƒŒƒCƒ„‚Ìó‘Ô
-    bool flag; //ƒ|[ƒYó‘Ô‚Ì—L–³(ÄŠJƒ|[ƒY‚Ì•ûŒü‚ğˆÛ‚·‚é‚½‚ß)
-    Direction pauseDirection; //ƒ|[ƒY‚ÌˆÚ“®•ûŒü‚ğ•Û‘¶‚·‚é•Ï”
-    [SerializeField] float flashInterval1; //“_–Å‚ÌŠÔŠu[s]
-    [SerializeField] float flashInterval2; //“_–Å‚ÌŠÔŠu[s](‰ğœ‚ª‹ß‚¢)
-    [SerializeField] int damageLoopCount; //ƒ_ƒ[ƒW‚Ì“_–Å‚Ì‰ñ”
-    [SerializeField] int barrierLoopCount1; //ƒAƒCƒeƒ€‚É‚æ‚é–³“G‚Ì“_–Å‰ñ”
-    [SerializeField] int barrierLoopCount2; //ƒAƒCƒeƒ€‚É‚æ‚é–³“G‚Ì“_–Å‰ñ”(‰ğœ‚ª‹ß‚¢‚Æ‚«)
-    SpriteRenderer sp; //“_–Å—p‚ÌƒXƒvƒ‰ƒCƒgƒŒƒ“ƒ_ƒ‰[
+    float speed; //ç§»å‹•ã‚¹ãƒ”ãƒ¼ãƒ‰
+    Vector2 startPos; //æŒ‡ãŒè§¦ã‚ŒãŸåº§æ¨™
+    Vector2 endPos; //æŒ‡ãŒé›¢ã‚ŒãŸåº§æ¨™
+    Vector2 moveVector; //ã‚¹ãƒ¯ã‚¤ãƒ—ã®ãƒ™ã‚¯ãƒˆãƒ«
+    Direction direcction; //ç¾åœ¨ã®ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç§»å‹•æ–¹å‘(åˆæœŸã¯åœæ­¢)
+    State state; //ãƒ—ãƒ¬ã‚¤ãƒ¤ã®çŠ¶æ…‹
+    bool flag; //ãƒãƒ¼ã‚ºçŠ¶æ…‹ã®æœ‰ç„¡(å†é–‹æ™‚ãƒãƒ¼ã‚ºæ™‚ã®æ–¹å‘ã‚’ç¶­æŒã™ã‚‹ãŸã‚)
+    Direction pauseDirection; //ãƒãƒ¼ã‚ºæ™‚ã®ç§»å‹•æ–¹å‘ã‚’ä¿å­˜ã™ã‚‹å¤‰æ•°
+    [SerializeField] float flashInterval1; //ç‚¹æ»…ã®é–“éš”[s]
+    [SerializeField] float flashInterval2; //ç‚¹æ»…ã®é–“éš”[s](è§£é™¤ãŒè¿‘ã„æ™‚)
+    [SerializeField] int damageLoopCount; //ãƒ€ãƒ¡ãƒ¼ã‚¸æ™‚ã®ç‚¹æ»…ã®å›æ•°
+    [SerializeField] int barrierLoopCount1; //ã‚¢ã‚¤ãƒ†ãƒ ã«ã‚ˆã‚‹ç„¡æ•µã®ç‚¹æ»…å›æ•°
+    [SerializeField] int barrierLoopCount2; //ã‚¢ã‚¤ãƒ†ãƒ ã«ã‚ˆã‚‹ç„¡æ•µã®ç‚¹æ»…å›æ•°(è§£é™¤ãŒè¿‘ã„ã¨ã)
+    SpriteRenderer sp; //ç‚¹æ»…ç”¨ã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆãƒ¬ãƒ³ãƒ€ãƒ©ãƒ¼
 
-    //Œø‰Ê‰¹—p‚Ì•Ï”
-    [SerializeField] AudioSource seAudioSource;
-    [SerializeField] public AudioClip damageSE;
-    [SerializeField] public AudioClip healSE;
-    [SerializeField] public AudioClip barrierSE;
-    [SerializeField] public AudioClip barrierSE2;
-    [SerializeField] public AudioClip life1SE;
-    [SerializeField] public AudioClip barrierHitSE;
+    //åŠ¹æœéŸ³ç”¨ã®å¤‰æ•°
+    [SerializeField] AudioSource seAudioSource; //ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªã‚½ãƒ¼ã‚¹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
+    [SerializeField] public AudioClip damageSE; //ãƒ€ãƒ¡ãƒ¼ã‚¸SE
+    [SerializeField] public AudioClip healSE; //ãƒãƒ¼ãƒˆå–å¾—SE
+    [SerializeField] public AudioClip barrierSE; //ãƒãƒªã‚¢ã‚¹ã‚¿ãƒ¼å–å¾—SE
+    [SerializeField] public AudioClip barrierSE2; //ãƒãƒªã‚¢ã‚¹ã‚¿ãƒ¼è§£é™¤è­¦å‘ŠSE
+    [SerializeField] public AudioClip life1SE; //ãƒ©ã‚¤ãƒ•1SE
+    [SerializeField] public AudioClip barrierHitSE; //ãƒãƒªã‚¢ã‚¹ã‚¿ãƒ¼åŠ¹æœä¸­ã®æ•µæ’ƒç ´SE
 
-    //‰Šúİ’è
+    //åˆæœŸè¨­å®š
     // Start is called before the first frame update
     void Start()
     {
-        //•Ï”‚Ì‰Šú‰»
+        //å¤‰æ•°ã®åˆæœŸåŒ–
         this.sp = GetComponent<SpriteRenderer>();
         this.speed = 0.06f;
         this.direcction = Direction.Stop;
@@ -64,25 +64,25 @@ public class BossyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PauseDirector.getPaused())//ƒ|[ƒY‚Íˆ—’â~
+        if (PauseDirector.getPaused())//ãƒãƒ¼ã‚ºæ™‚ã¯å‡¦ç†åœæ­¢
         {
             this.pauseDirection = this.direcction;
             this.flag = true;
             return;
         }
 
-        //ƒXƒƒCƒv‚ÌŠJn
+        //ã‚¹ãƒ¯ã‚¤ãƒ—ã®é–‹å§‹
         if (Input.GetMouseButtonDown(0))
         {
             startPos = Input.mousePosition;
         }
-        //ƒXƒƒCƒv‚ÌI—¹
+        //ã‚¹ãƒ¯ã‚¤ãƒ—ã®çµ‚äº†
         if (Input.GetMouseButtonUp(0))
         {
             endPos = Input.mousePosition;
             moveVector = endPos - startPos;
-            //ƒXƒƒCƒv‚Ì•ûŒü‚É‰‚¶‚ÄˆÚ“®•ûŒü‚ğŒˆ’è
-            //ƒXƒƒCƒvƒxƒNƒgƒ‹‚ÌŠe¬•ª‚Ì³•‰‚Æâ‘Î’l‚Ì‘å‚«‚³‚©‚çã‰º¶‰E‚Ì‚¢‚¸‚ê‚©‚ÉŒˆ’è
+            //ã‚¹ãƒ¯ã‚¤ãƒ—ã®æ–¹å‘ã«å¿œã˜ã¦ç§»å‹•æ–¹å‘ã‚’æ±ºå®š
+            //ã‚¹ãƒ¯ã‚¤ãƒ—ãƒ™ã‚¯ãƒˆãƒ«ã®å„æˆåˆ†ã®æ­£è² ã¨çµ¶å¯¾å€¤ã®å¤§ãã•ã‹ã‚‰ä¸Šä¸‹å·¦å³ã®ã„ãšã‚Œã‹ã«æ±ºå®š
             if (Math.Abs(moveVector.x) > Math.Abs(moveVector.y))
             {
                 if (moveVector.x > 0)
@@ -107,12 +107,12 @@ public class BossyController : MonoBehaviour
 
         if (this.flag)
         {
-            //ƒ|[ƒY‚ª‰ğœ‚³‚ê‚½‚çˆÚ“®•ûŒü‚ğƒ|[ƒY‚Ì‚à‚Ì‚É
+            //ãƒãƒ¼ã‚ºãŒè§£é™¤ã•ã‚ŒãŸã‚‰ç§»å‹•æ–¹å‘ã‚’ãƒãƒ¼ã‚ºæ™‚ã®ã‚‚ã®ã«
             this.direcction = this.pauseDirection;
             this.flag = false;
         }
 
-        //Œ»İ‚ÌˆÚ“®•ûŒü‚É]‚¢‰æ–Ê“à‚Ì”ÍˆÍ‚ÅƒvƒŒƒCƒ„‚ğˆÚ“®‚³‚¹‚é(ã‰º‚ÌŒÀŠE‚É’B‚µ‚½‚ç‹t•ûŒü‚Ö)
+        //ç¾åœ¨ã®ç§»å‹•æ–¹å‘ã«å¾“ã„ç”»é¢å†…ã®ç¯„å›²ã§ãƒ—ãƒ¬ã‚¤ãƒ¤ã‚’ç§»å‹•ã•ã›ã‚‹(ä¸Šä¸‹ã®é™ç•Œã«é”ã—ãŸã‚‰é€†æ–¹å‘ã¸)
         if ((direcction == Direction.Up) && (transform.position.y < 4.5f))
         {
             transform.Translate(0, this.speed, 0);
@@ -139,21 +139,21 @@ public class BossyController : MonoBehaviour
         }
     }
 
-    //ƒIƒuƒWƒFƒNƒg‚Æ‚ÌÚG‚Ìˆ—
+    //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¨ã®æ¥è§¦æ™‚ã®å‡¦ç†
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (PauseDirector.getPaused())//ƒ|[ƒY‚Íˆ—’â~
+        if (PauseDirector.getPaused())//ãƒãƒ¼ã‚ºæ™‚ã¯å‡¦ç†åœæ­¢
         {
             return;
         }
 
-        //“G‚Æ‚ÌÚG
+        //æ•µã¨ã®æ¥è§¦
         if (other.gameObject.CompareTag("Enemy"))
         {
             Destroy(other.gameObject);
             if (this.state == State.Normal)
             {
-                //’Êíó‘Ô‚Ìê‡
+                //é€šå¸¸çŠ¶æ…‹ã®å ´åˆ
                 GameObject director = GameObject.Find("GameDirector");
                 director.GetComponent<GameDirector>().Damage();
                 if (GameDirector.life == 1)
@@ -164,11 +164,11 @@ public class BossyController : MonoBehaviour
                 {
                     seAudioSource.PlayOneShot(damageSE);
                 }
-                this.state = State.DamageInvincible; //–³“Gó‘Ô‚ÖˆÚsi3•bj
-                StartCoroutine(damageFlash()); //“_–Å
+                this.state = State.DamageInvincible; //ç„¡æ•µçŠ¶æ…‹ã¸ç§»è¡Œï¼ˆ3ç§’ï¼‰
+                StartCoroutine(damageFlash()); //ç‚¹æ»…
             }else if (this.state == State.BarrierInvincible)
             {
-                //ƒAƒCƒeƒ€‚É‚æ‚é–³“Gó‘Ô‚Ìê‡
+                //ã‚¢ã‚¤ãƒ†ãƒ ã«ã‚ˆã‚‹ç„¡æ•µçŠ¶æ…‹ã®å ´åˆ
                 if (GameDirector.score + 50 < 9999999)
                 {
                     GameDirector.score += 50;
@@ -181,15 +181,15 @@ public class BossyController : MonoBehaviour
 
         }
 
-        //ƒAƒCƒeƒ€‚Æ‚ÌÚG
+        //ã‚¢ã‚¤ãƒ†ãƒ ã¨ã®æ¥è§¦
         if (other.gameObject.CompareTag("Barrier"))
         {
-            //ƒoƒŠƒAƒXƒ^[(–³“GƒAƒCƒeƒ€)‚Ìê‡
+            //ãƒãƒªã‚¢ã‚¹ã‚¿ãƒ¼(ç„¡æ•µã‚¢ã‚¤ãƒ†ãƒ )ã®å ´åˆ
             Destroy(other.gameObject);
             if (this.state == State.Normal)
             {
                 this.state = State.BarrierInvincible;
-                //ƒ_ƒ[ƒW‚©‚ç‚Ì–³“Gó‘Ô‚Ö‚ÌˆÚs‚Æ‚ÌŒ“‚Ë‡‚¢‚Åˆê’Uƒ_ƒ[ƒW“_–Å‚Ö
+                //ãƒ€ãƒ¡ãƒ¼ã‚¸æ™‚ã‹ã‚‰ã®ç„¡æ•µçŠ¶æ…‹ã¸ã®ç§»è¡Œã¨ã®å…¼ã­åˆã„ã§ä¸€æ—¦ãƒ€ãƒ¡ãƒ¼ã‚¸ç‚¹æ»…ã¸
                 StartCoroutine(damageFlash());
             }else
             {
@@ -200,7 +200,7 @@ public class BossyController : MonoBehaviour
 
         if (other.gameObject.CompareTag("Heart"))
         {
-            //ƒn[ƒg(‰ñ•œƒAƒCƒeƒ€)‚Ìê‡
+            //ãƒãƒ¼ãƒˆ(å›å¾©ã‚¢ã‚¤ãƒ†ãƒ )ã®å ´åˆ
             Destroy(other.gameObject);
             seAudioSource.PlayOneShot(healSE);
             GameObject director = GameObject.Find("GameDirector");
@@ -208,19 +208,19 @@ public class BossyController : MonoBehaviour
         }
     }
 
-    //ƒ_ƒ[ƒW‚Ì“_–Å(‚»‚ÌŠÔ–³“G)
+    //ãƒ€ãƒ¡ãƒ¼ã‚¸æ™‚ã®ç‚¹æ»…(ãã®é–“ç„¡æ•µ)
     IEnumerator damageFlash()
     {
-        //–³“GŠÔ‚ÍflashInterval1[s] * damageLoopCount1
+        //ç„¡æ•µæ™‚é–“ã¯flashInterval1[s] * damageLoopCount1
         for (int i = 0;(i < this.damageLoopCount) && (this.state == State.DamageInvincible);i++)
         {
-            //flashInterval1[s]‘Ò‚Á‚ÄƒvƒŒƒCƒ„‚ğ”ñ•\¦
+            //flashInterval1[s]å¾…ã£ã¦ãƒ—ãƒ¬ã‚¤ãƒ¤ã‚’éè¡¨ç¤º
             yield return new WaitForSeconds(flashInterval1);
             sp.enabled = false;
-            //flashInterval1[s]‘Ò‚Á‚ÄƒvƒŒƒCƒ„‚ğ•\¦
+            //flashInterval1[s]å¾…ã£ã¦ãƒ—ãƒ¬ã‚¤ãƒ¤ã‚’è¡¨ç¤º
             yield return new WaitForSeconds(flashInterval1);
             sp.enabled = true;
-            //ƒ|[ƒY’†‚Í–³“GŠÔ‚ªŒ¸‚ç‚È‚¢
+            //ãƒãƒ¼ã‚ºä¸­ã¯ç„¡æ•µæ™‚é–“ãŒæ¸›ã‚‰ãªã„
             if (PauseDirector.getPaused())
             {
                 i--;
@@ -229,49 +229,49 @@ public class BossyController : MonoBehaviour
 
         if (this.state == State.DamageInvincible)
         {
-            this.state = State.Normal; //–³“Gó‘Ô‰ğœ
+            this.state = State.Normal; //ç„¡æ•µçŠ¶æ…‹è§£é™¤
         }else if (this.state == State.BarrierInvincible)
         {
-            StartCoroutine(barrierFlash()); //–³“Gó‘Ô‚Ì“_–Å‚ÖˆÚs
+            StartCoroutine(barrierFlash()); //ç„¡æ•µçŠ¶æ…‹ã®ç‚¹æ»…ã¸ç§»è¡Œ
         }
     }
 
-    //–³“G‚Ì“_–Å
+    //ç„¡æ•µæ™‚ã®ç‚¹æ»…
     IEnumerator barrierFlash()
     {
-        //–³“GŠÔ‚Í2 * (flashInterval1[s] * barrierLoopCount1 + flashInterval2[s] * barrierLoopCount2)
-        //ƒAƒCƒeƒ€ƒQƒbƒg’¼Œã
+        //ç„¡æ•µæ™‚é–“ã¯2 * (flashInterval1[s] * barrierLoopCount1 + flashInterval2[s] * barrierLoopCount2)
+        //ã‚¢ã‚¤ãƒ†ãƒ ã‚²ãƒƒãƒˆç›´å¾Œ
         for (int i = 0;i < this.barrierLoopCount1;i++)
         {
-            //flashInterval1[s]‘Ò‚Á‚ÄƒvƒŒƒCƒ„‚ğ”ñ•\¦
+            //flashInterval1[s]å¾…ã£ã¦ãƒ—ãƒ¬ã‚¤ãƒ¤ã‚’éè¡¨ç¤º
             yield return new WaitForSeconds(flashInterval1);
             sp.enabled = false;
-            //flashInterval1[s]‘Ò‚Á‚ÄƒvƒŒƒCƒ„‚ğ•\¦
+            //flashInterval1[s]å¾…ã£ã¦ãƒ—ãƒ¬ã‚¤ãƒ¤ã‚’è¡¨ç¤º
             yield return new WaitForSeconds(flashInterval1);
             sp.enabled = true;
-            //ƒ|[ƒY’†‚Í–³“GŠÔ‚ªŒ¸‚ç‚È‚¢
+            //ãƒãƒ¼ã‚ºä¸­ã¯ç„¡æ•µæ™‚é–“ãŒæ¸›ã‚‰ãªã„
             if (PauseDirector.getPaused())
             {
                 i--;
             }
         }
         seAudioSource.PlayOneShot(barrierSE2);
-        //‰ğœŠÔ‹ß‚Í“_–Å‚ª’x‚­‚È‚é
+        //è§£é™¤é–“è¿‘ã¯ç‚¹æ»…ãŒé…ããªã‚‹
         for (int i = 0; i < this.barrierLoopCount2; i++)
         {
-            //flashInterval2[s]‘Ò‚Á‚ÄƒvƒŒƒCƒ„‚ğ”ñ•\¦
+            //flashInterval2[s]å¾…ã£ã¦ãƒ—ãƒ¬ã‚¤ãƒ¤ã‚’éè¡¨ç¤º
             yield return new WaitForSeconds(flashInterval2);
             sp.enabled = false;
-            //flashInterval2[s]‘Ò‚Á‚ÄƒvƒŒƒCƒ„‚ğ•\¦
+            //flashInterval2[s]å¾…ã£ã¦ãƒ—ãƒ¬ã‚¤ãƒ¤ã‚’è¡¨ç¤º
             yield return new WaitForSeconds(flashInterval2);
             sp.enabled = true;
-            //ƒ|[ƒY’†‚Í–³“GŠÔ‚ªŒ¸‚ç‚È‚¢
+            //ãƒãƒ¼ã‚ºä¸­ã¯ç„¡æ•µæ™‚é–“ãŒæ¸›ã‚‰ãªã„
             if (PauseDirector.getPaused())
             {
                 i--;
             }
         }
 
-        this.state = State.Normal; //–³“Gó‘Ô‰ğœ
+        this.state = State.Normal; //ç„¡æ•µçŠ¶æ…‹è§£é™¤
     }
 }
