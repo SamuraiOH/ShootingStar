@@ -2,46 +2,46 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//BGM‚ÌŠÇ—
+//BGMã®ç®¡ç†
 public class GameAudioDirector : MonoBehaviour
 {
-    //BGM‚ÌÄ¶—pƒRƒ“ƒ|[ƒlƒ“ƒg(ƒCƒ“ƒgƒ•”‚Æƒ‹[ƒv•”)
-    [SerializeField] AudioSource introAudioSource;
-    [SerializeField] AudioSource loopAudioSource;
+    //BGMã®å†ç”Ÿç”¨ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ(ã‚¤ãƒ³ãƒˆãƒ­éƒ¨ã¨ãƒ«ãƒ¼ãƒ—éƒ¨)
+    [SerializeField] AudioSource introAudioSource; //ã‚¤ãƒ³ãƒˆãƒ­ç”¨ã®ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªã‚½ãƒ¼ã‚¹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
+    [SerializeField] AudioSource loopAudioSource; //ãƒ«ãƒ¼ãƒ—éƒ¨ç”¨ã®ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªã‚½ãƒ¼ã‚¹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
     
-    bool isPausingIntro; //ƒCƒ“ƒgƒ’†‚Éƒ|[ƒY‚µ‚½‚©‚Ç‚¤‚©
+    bool isPausingIntro; //ã‚¤ãƒ³ãƒˆãƒ­ä¸­ã«ãƒãƒ¼ã‚ºã—ãŸã‹ã©ã†ã‹
 
-    //ƒ|[ƒY‚ÌBGM‚Ìˆê’â~
+    //ãƒãƒ¼ã‚ºæ™‚ã®BGMã®ä¸€æ™‚åœæ­¢
     public void pause()
     {
-        //ƒCƒ“ƒgƒ’†‚Éˆê’â~‚µ‚½‚©‚Ç‚¤‚©
+        //ã‚¤ãƒ³ãƒˆãƒ­ä¸­ã«ä¸€æ™‚åœæ­¢ã—ãŸã‹ã©ã†ã‹
         isPausingIntro = introAudioSource.isPlaying;
 
-        //BGM‚Ìˆê’â~
+        //BGMã®ä¸€æ™‚åœæ­¢
         loopAudioSource.Pause();
         introAudioSource.Pause();
     }
 
-    //ƒ|[ƒY•œ‹A‚ÌBGM‚ÌÄŠJ
+    //ãƒãƒ¼ã‚ºå¾©å¸°æ™‚ã®BGMã®å†é–‹
     public void unpause()
     {
-        //ƒCƒ“ƒgƒ‚ÌÄŠJ(I—¹‚µ‚Ä‚¢‚½‚ç‚È‚ç‚È‚¢)
+        //ã‚¤ãƒ³ãƒˆãƒ­ã®å†é–‹(çµ‚äº†ã—ã¦ã„ãŸã‚‰ãªã‚‰ãªã„)
         introAudioSource.UnPause();
 
         if (isPausingIntro)
         {
-            //ƒCƒ“ƒgƒ’†‚Éˆê’â~‚µ‚½ê‡‚Íƒ‹[ƒv•”•ª‚Ì’x‰„Ä¶‚ğİ’è‚µ’¼‚·
+            //ã‚¤ãƒ³ãƒˆãƒ­ä¸­ã«ä¸€æ™‚åœæ­¢ã—ãŸå ´åˆã¯ãƒ«ãƒ¼ãƒ—éƒ¨åˆ†ã®é…å»¶å†ç”Ÿã‚’è¨­å®šã—ç›´ã™
             loopAudioSource.Stop();
             loopAudioSource.PlayScheduled(AudioSettings.dspTime - introAudioSource.time + ((float)introAudioSource.clip.samples / (float)introAudioSource.clip.frequency));
         }
         else
         {
-            //ƒ‹[ƒv‚É“Ë“ü‚µ‚Ä‚¢‚½‚çƒ‹[ƒv•”•ª‚ÌÄŠJ
+            //ãƒ«ãƒ¼ãƒ—ã«çªå…¥ã—ã¦ã„ãŸã‚‰ãƒ«ãƒ¼ãƒ—éƒ¨åˆ†ã®å†é–‹
             loopAudioSource.UnPause();
         }
     }
 
-    //ƒQ[ƒ€ƒI[ƒo[‚ÌBGM’â~
+    //ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼æ™‚ã®BGMåœæ­¢
     public void stop()
     {
         introAudioSource.Stop();
@@ -51,7 +51,7 @@ public class GameAudioDirector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //BGMÄ¶(‚Ü‚¸ƒCƒ“ƒgƒ‚ğÄ¶‚µA‚»‚Ì‚ ‚Æƒ‹[ƒv•”•ªÄ¶)
+        //BGMå†ç”Ÿ(ã¾ãšã‚¤ãƒ³ãƒˆãƒ­ã‚’å†ç”Ÿã—ã€ãã®ã‚ã¨ãƒ«ãƒ¼ãƒ—éƒ¨åˆ†å†ç”Ÿ)
         introAudioSource.PlayScheduled(AudioSettings.dspTime);
         loopAudioSource.PlayScheduled(AudioSettings.dspTime + ((float)introAudioSource.clip.samples / (float)introAudioSource.clip.frequency));
     }
