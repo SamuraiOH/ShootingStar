@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//“G(ƒ^ƒR)‚Ì§Œä
-//ˆê’è‚ÌƒXƒs[ƒh‚Å¶‚Ö“®‚­•1‰ñ’e‚ğ”­Ë
+//æ•µ(ã‚¿ã‚³)ã®åˆ¶å¾¡
+//ä¸€å®šã®ã‚¹ãƒ”ãƒ¼ãƒ‰ã§å·¦ã¸å‹•ãï¼†1å›å¼¾ã‚’ç™ºå°„
 public class OctopusController : MonoBehaviour
 {
-    float octopusSpeed; //ˆÚ“®ƒXƒs[ƒh
-    public GameObject enemyballPrefab; //’e‚ğ¶¬‚·‚éPrefab
-    bool attackFlag; //UŒ‚ƒtƒ‰ƒO(UŒ‚‚ğ”­Ë‚µ‚½‚©‚Ç‚¤‚©‚Ì”»’f)
+    float octopusSpeed; //ç§»å‹•ã‚¹ãƒ”ãƒ¼ãƒ‰
+    public GameObject enemyballPrefab; //å¼¾ã‚’ç”Ÿæˆã™ã‚‹Prefab
+    bool attackFlag; //æ”»æ’ƒãƒ•ãƒ©ã‚°(æ”»æ’ƒã‚’ç™ºå°„ã—ãŸã‹ã©ã†ã‹ã®åˆ¤æ–­)
 
-    //’e”­Ë‚ÌŒø‰Ê‰¹
-    [SerializeField] AudioSource seAudioSource;
-    [SerializeField] public AudioClip attackSE;
+    //å¼¾ç™ºå°„ã®åŠ¹æœéŸ³
+    [SerializeField] AudioSource seAudioSource; //ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªã‚½ãƒ¼ã‚¹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
+    [SerializeField] public AudioClip attackSE; //å¼¾ç™ºå°„SE
 
     // Start is called before the first frame update
     void Start()
@@ -24,26 +24,26 @@ public class OctopusController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PauseDirector.getPaused())//ƒ|[ƒY‚Íˆ—’â~
+        if (PauseDirector.getPaused())//ãƒãƒ¼ã‚ºæ™‚ã¯å‡¦ç†åœæ­¢
         {
             return;
         }
 
-        //ˆê’è‚ÌƒXƒs[ƒhi”wŒi‚Æ“¯‚¶j‚ÅˆÚ“®
+        //ä¸€å®šã®ã‚¹ãƒ”ãƒ¼ãƒ‰ï¼ˆèƒŒæ™¯ã¨åŒã˜ï¼‰ã§ç§»å‹•
         transform.Translate(this.octopusSpeed, 0, 0);
-        //‰æ–Ê‚ğ’Ê‰ß‚µ‚½‚çÁ–Å
+        //ç”»é¢ã‚’é€šéã—ãŸã‚‰æ¶ˆæ»…
         if (transform.position.x < -3.0f)
         {
             Destroy(gameObject);
         }
-        //xÀ•W‚ª2‚æ‚è¶‚É‚È‚é‚Æ1“x‚¾‚¯’e‚ğ”­Ë
+        //xåº§æ¨™ãŒ2ã‚ˆã‚Šå·¦ã«ãªã‚‹ã¨1åº¦ã ã‘å¼¾ã‚’ç™ºå°„
         if ((transform.position.x <= 2.0f) && (attackFlag == true))
         {
             GameObject go = Instantiate(enemyballPrefab);
             float octopusYPosition = transform.position.y;
             go.transform.position = new Vector3(1.5f, octopusYPosition, 0);
             attackFlag = false;
-            //Œø‰Ê‰¹
+            //åŠ¹æœéŸ³
             seAudioSource.PlayOneShot(attackSE);
         }
     }
