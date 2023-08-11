@@ -16,7 +16,10 @@ Unityの個人製作(Android)
   タップでゲームがスタートされます。 
 - 「ゲーム説明」ボタン 
   
-  押すと説明画面に切り替わり、ゲーム説明を見ることができます。 
+  押すと説明画面に切り替わり、ゲーム説明を見ることができます。
+- ハイスコア
+
+  過去の最高得点上位3位。(アプリごとにローカルで記録)
 
 ### 説明画面
 <img src="https://github.com/SamuraiOH/ShootingStar/assets/92005492/ee5faa84-b225-4ccb-9da5-38b92d109cd1" width="25%" />  
@@ -40,4 +43,12 @@ Unityの個人製作(Android)
   タップするとポーズ画面に移行し、ゲームが一時停止されます。
 
 ### ポーズ画面
-<img src="https://github.com/SamuraiOH/ShootingStar/assets/92005492/979daabb-fbf8-4076-8a57-a2ec163c21cb" width="25%" />
+<img src="https://github.com/SamuraiOH/ShootingStar/assets/92005492/979daabb-fbf8-4076-8a57-a2ec163c21cb" width="25%" /> 
+
+ゲーム起動時の画面。 
+- 「ゲームを再開する」ボタン  
+  
+  タップでゲームが再開されます。 
+- 「ゲームをやめる」ボタン 
+  
+  押すとゲームを終了し、タイトル画面へ戻ります。(スコアの記録はされません。)
