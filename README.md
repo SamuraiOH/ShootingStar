@@ -6,7 +6,7 @@ Unityの個人製作
 
 ## ゲーム説明
 ### タイトル画面
-<img src="https://github.com/SamuraiOH/ShootingStar/assets/92005492/45db09f1-ed30-4f40-be48-510309dfd2a4" width="25%" /> \n
+<img src="https://github.com/SamuraiOH/ShootingStar/assets/92005492/45db09f1-ed30-4f40-be48-510309dfd2a4" width="25%" /> 
 ゲーム起動時の画面。
 - 「スタート」ボタン：押すとゲームがスタートされる
 - 「ゲーム説明」ボタン：押すと説明画面に切り替わり、ゲーム説明を見ることができる
