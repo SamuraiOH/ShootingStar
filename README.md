@@ -22,5 +22,6 @@ Unityの個人製作
 ゲーム説明時の画面。タップするとタイトル画面に戻ります。  
 
 ### ゲーム画面
+<img src="https://github.com/SamuraiOH/ShootingStar/assets/92005492/0bcc1094-d9dd-4c04-a161-b95af8134444" width="25%" />
 
-
+ゲーム画面。
