@@ -17,6 +17,10 @@ Unityの個人製作
   押すと説明画面に切り替わり、ゲーム説明を見ることができます。
 
 ### 説明画面
-<img src="https://github.com/SamuraiOH/ShootingStar/assets/92005492/ee5faa84-b225-4ccb-9da5-38b92d109cd1" width="25%" />
+<img src="https://github.com/SamuraiOH/ShootingStar/assets/92005492/ee5faa84-b225-4ccb-9da5-38b92d109cd1" width="25%" />  
+
+ゲーム説明時の画面。タップするとタイトル画面に戻ります。  
+
+### ゲーム画面
 
 
