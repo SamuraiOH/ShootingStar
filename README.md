@@ -109,6 +109,11 @@ Unityの個人製作(Android)
 
 ### 背景
 ### BGM
+「DOVA-SYNDROME」
+https://dova-s.jp/
+
+- 「Trick style」written by まんぼう三等兵
+- 「追いかけっこキャッハー」 written by 今川彰人オーケストラ
 ### 効果音
 「効果音ラボ」
 https://soundeffect-lab.info/
