@@ -77,6 +77,17 @@ Unityの個人製作(Android)
 　上下に蛇行しながら右から左に進んできます。
 
 ### アイテム
+- バリアスター
+
+![point](https://github.com/SamuraiOH/ShootingStar/assets/92005492/95623128-0b49-46cf-96cd-6ebd94d43081)
+
+  時々右から左へ流れてきて、触れることでしばらくの間無敵になります。そして、その間は敵に当たって倒すことができ、そのたびにスコアが50加算されます。
+
+- ハート
+
+![heart](https://github.com/SamuraiOH/ShootingStar/assets/92005492/929e7c37-a21f-41aa-a8c4-4cc657593e59)
+
+　時々右から左へ流れてきて、触れることでライフが1増えます。(最大5)
 
 ### ポーズ画面
 <img src="https://github.com/SamuraiOH/ShootingStar/assets/92005492/979daabb-fbf8-4076-8a57-a2ec163c21cb" width="25%" /> 
