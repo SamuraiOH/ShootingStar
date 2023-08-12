@@ -104,9 +104,20 @@ Unityの個人製作(Android)
 　背景画像とBGM、効果音、UIのフォントはフリーの素材を使用させていただいています。
 
 ### フォント
-- 「RocknRoll One」
+- 「Google Fonts」
 　https://fonts.google.com/specimen/RocknRoll+One/about?query=rock
 
 ### 背景
 ### BGM
 ### 効果音
+「効果音ラボ」
+https://soundeffect-lab.info/
+
+- 警告音1
+- 警告音2
+- 中パンチ
+- 回復魔法1
+- ステータス上昇魔法2
+- ショット命中
+- キャンセル3
+- チーン1
