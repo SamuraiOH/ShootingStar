@@ -56,7 +56,7 @@ Unityの個人製作(Android)
 
 ![fish](https://github.com/SamuraiOH/ShootingStar/assets/92005492/ad583521-a7f1-48cb-adb0-4aaaa59a53e9)
 
-　右から左へまっすぐ突っ込んできます。
+　左側へまっすぐ突っ込んできます。
 
 - 隕石
 
@@ -74,7 +74,7 @@ Unityの個人製作(Android)
 
 ![squid](https://github.com/SamuraiOH/ShootingStar/assets/92005492/4db6b7f1-8676-42cc-96c5-a97345a698ab)
 
-　上下に蛇行しながら右から左に進んできます。
+　上下に蛇行しながら左に進んできます。
 
 ### アイテム
 - バリアスター
@@ -99,3 +99,5 @@ Unityの個人製作(Android)
 - 「ゲームをやめる」ボタン 
   
   押すとゲームを終了し、タイトル画面へ戻ります。(スコアの記録はされません。)
+
+## 使用素材について
