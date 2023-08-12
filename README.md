@@ -41,9 +41,9 @@ Unityの個人製作(Android)
 
   プレイヤーの得点。基本的に0.1秒に1点加算されます。
 
-![life](https://github.com/SamuraiOH/ShootingStar/assets/92005492/e9c555cd-7cbd-4e5e-9375-22830f8ca649)
-
 - ライフ
+
+  ![life](https://github.com/SamuraiOH/ShootingStar/assets/92005492/e9c555cd-7cbd-4e5e-9375-22830f8ca649)
   
   プレイヤーの体力。障害物に当たるたびに1つずつ減っていき、0になるとゲームオーバーです。
 - ポーズボタン(右下)
