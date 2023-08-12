@@ -104,9 +104,10 @@ Unityの個人製作(Android)
 　背景画像とBGM、効果音、UIのフォントはフリーの素材を使用させていただいています。
 
 ### フォント
-- 「Google Fonts」
-　https://fonts.google.com/specimen/RocknRoll+One/about?query=rock
+「Google Fonts」
+https://fonts.google.com/specimen/RocknRoll+One/about?query=rock
 
+- 「RocknRoll One」 designed by Fontworks Inc.
 ### 背景画像
 「Unity Asset Store」
 https://assetstore.unity.com/ja?locale=ja-JP
