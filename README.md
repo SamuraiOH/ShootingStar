@@ -107,7 +107,11 @@ Unityの個人製作(Android)
 - 「Google Fonts」
 　https://fonts.google.com/specimen/RocknRoll+One/about?query=rock
 
-### 背景
+### 背景画像
+「Unity Asset Store」
+https://assetstore.unity.com/ja?locale=ja-JP
+
+- 「Dynamic Space Background」 designed by DinV Studio
 ### BGM
 「DOVA-SYNDROME」
 https://dova-s.jp/
