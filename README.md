@@ -34,7 +34,7 @@ Unityの個人製作(Android)
 
 ![Bossy](https://github.com/SamuraiOH/ShootingStar/assets/92005492/acabc1cd-0353-4808-8600-8794268f53f1)
 
-  プレイヤー。画面をスワイプするとその方向に応じて上下左右のいずれかに動き続けます。
+  プレイヤー。画面をスワイプするとその方向に応じて上下左右のいずれかに動き続けます。(上下は画面端で跳ね返り、左右は画面端で止まります。)
 - スコア
 
 ![score](https://github.com/SamuraiOH/ShootingStar/assets/92005492/4ee7286c-f8d7-43c8-b7bc-e8e41750a984)
@@ -52,7 +52,11 @@ Unityの個人製作(Android)
   タップするとポーズ画面に移行し、ゲームが一時停止されます。
 
 ### 障害物
+- ピラニア
 
+![fish](https://github.com/SamuraiOH/ShootingStar/assets/92005492/ad583521-a7f1-48cb-adb0-4aaaa59a53e9)
+
+　右から左へまっすぐ突っ込んできます。
 ### アイテム
 
 ### ポーズ画面
