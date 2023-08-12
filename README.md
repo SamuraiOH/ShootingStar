@@ -57,6 +57,25 @@ Unityの個人製作(Android)
 ![fish](https://github.com/SamuraiOH/ShootingStar/assets/92005492/ad583521-a7f1-48cb-adb0-4aaaa59a53e9)
 
 　右から左へまっすぐ突っ込んできます。
+
+- 隕石
+
+![stone](https://github.com/SamuraiOH/ShootingStar/assets/92005492/d35260b4-8461-4a7e-92d7-e94106cc234b)
+
+　上から左下にまっすぐ落ちてきます。
+
+- オクトパス
+
+![octopus](https://github.com/SamuraiOH/ShootingStar/assets/92005492/3df0e949-dee7-4659-84be-c2543c87d042)
+
+　動きはピラニアと同じですが、1回弾を撃ってきます。
+
+- スキッド
+
+![squid](https://github.com/SamuraiOH/ShootingStar/assets/92005492/4db6b7f1-8676-42cc-96c5-a97345a698ab)
+
+　上下に蛇行しながら右から左に進んできます。
+
 ### アイテム
 
 ### ポーズ画面
