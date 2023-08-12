@@ -105,3 +105,8 @@ Unityの個人製作(Android)
 
 ### フォント
 - 「RocknRoll One」
+　https://fonts.google.com/specimen/RocknRoll+One/about?query=rock
+
+### 背景
+### BGM
+### 効果音
