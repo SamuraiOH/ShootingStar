@@ -36,8 +36,13 @@ Unityの個人製作(Android)
 
   プレイヤー。画面をスワイプするとその方向に応じて上下左右のいずれかに動き続けます。
 - スコア
-  
+
+![score](https://github.com/SamuraiOH/ShootingStar/assets/92005492/4ee7286c-f8d7-43c8-b7bc-e8e41750a984)
+
   プレイヤーの得点。基本的に0.1秒に1点加算されます。
+
+![life](https://github.com/SamuraiOH/ShootingStar/assets/92005492/e9c555cd-7cbd-4e5e-9375-22830f8ca649)
+
 - ライフ
   
   プレイヤーの体力。障害物に当たるたびに1つずつ減っていき、0になるとゲームオーバーです。
