@@ -31,7 +31,9 @@ Unityの個人製作(Android)
 
 ゲーム画面。
 - ボッシー
-  
+
+![Bossy](https://github.com/SamuraiOH/ShootingStar/assets/92005492/acabc1cd-0353-4808-8600-8794268f53f1)
+
   プレイヤー。画面をスワイプするとその方向に応じて上下左右のいずれかに動き続けます。
 - スコア
   
