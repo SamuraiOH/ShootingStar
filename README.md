@@ -107,9 +107,9 @@ Unityの個人製作(Android)
 「Google Fonts」
 https://fonts.google.com/specimen/RocknRoll+One/about?query=rock
 
-※このリポジトリに含まれています。
-
 - 「RocknRoll One」 designed by Fontworks Inc.
+
+※このリポジトリに含まれています。
 ### 背景画像
 「Unity Asset Store」
 https://assetstore.unity.com/ja?locale=ja-JP
