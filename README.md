@@ -85,7 +85,7 @@ Unityの個人製作(Android)
 ### ポーズ画面
 <img src="https://github.com/SamuraiOH/ShootingStar/assets/92005492/979daabb-fbf8-4076-8a57-a2ec163c21cb" width="25%" />  
 
-ゲーム起動時の画面。 
+ポーズ時の画面。 
 
 - 「ゲームを再開する」ボタン      
   タップでゲームが再開されます。
