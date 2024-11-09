@@ -2,49 +2,61 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//æ•µ(ã‚¿ã‚³)ã®åˆ¶å¾¡
-//ä¸€å®šã®ã‚¹ãƒ”ãƒ¼ãƒ‰ã§å·¦ã¸å‹•ãï¼†1å›å¼¾ã‚’ç™ºå°„
+//“G(ƒ^ƒR)‚Ì§Œä
+//ˆê’è‚ÌƒXƒs[ƒh‚Å¶‚Ö“®‚­•1‰ñ’e‚ğ”­Ë
 public class OctopusController : MonoBehaviour
 {
-    float octopusSpeed; //ç§»å‹•ã‚¹ãƒ”ãƒ¼ãƒ‰
-    public GameObject enemyballPrefab; //å¼¾ã‚’ç”Ÿæˆã™ã‚‹Prefab
-    bool attackFlag; //æ”»æ’ƒãƒ•ãƒ©ã‚°(æ”»æ’ƒã‚’ç™ºå°„ã—ãŸã‹ã©ã†ã‹ã®åˆ¤æ–­)
+    float octopusSpeed; //ˆÚ“®ƒXƒs[ƒh
+    float incOctopusSpeed; //ˆÚ“®ƒXƒs[ƒh‚Ìã‚ª‚è•
+    public GameObject enemyballPrefab; //’e‚ğ¶¬‚·‚éPrefab
+    bool attackFlag; //UŒ‚ƒtƒ‰ƒO(UŒ‚‚ğ”­Ë‚µ‚½‚©‚Ç‚¤‚©‚Ì”»’f)
+    int level; //ƒQ[ƒ€‚ÌƒŒƒxƒ‹(ƒXƒs[ƒh‚É‰e‹¿)
 
-    //å¼¾ç™ºå°„ã®åŠ¹æœéŸ³
-    [SerializeField] AudioSource seAudioSource; //ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªã‚½ãƒ¼ã‚¹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
-    [SerializeField] public AudioClip attackSE; //å¼¾ç™ºå°„SE
+    //’e”­Ë‚ÌŒø‰Ê‰¹
+    [SerializeField] AudioSource seAudioSource;
+    [SerializeField] public AudioClip attackSE;
 
     // Start is called before the first frame update
     void Start()
     {
         this.octopusSpeed = -0.04f;
+        this.incOctopusSpeed = this.octopusSpeed * 0.1f;
+        this.octopusSpeed += (float)this.level * this.incOctopusSpeed;
+
         this.attackFlag = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (PauseDirector.getPaused())//ãƒãƒ¼ã‚ºæ™‚ã¯å‡¦ç†åœæ­¢
+        if (PauseDirector.getPaused())//ƒ|[ƒY‚Íˆ—’â~
         {
             return;
         }
 
-        //ä¸€å®šã®ã‚¹ãƒ”ãƒ¼ãƒ‰ï¼ˆèƒŒæ™¯ã¨åŒã˜ï¼‰ã§ç§»å‹•
+        //ˆê’è‚ÌƒXƒs[ƒhi”wŒi‚Æ“¯‚¶j‚ÅˆÚ“®
         transform.Translate(this.octopusSpeed, 0, 0);
-        //ç”»é¢ã‚’é€šéã—ãŸã‚‰æ¶ˆæ»…
+        //‰æ–Ê‚ğ’Ê‰ß‚µ‚½‚çÁ–Å
         if (transform.position.x < -3.0f)
         {
             Destroy(gameObject);
         }
-        //xåº§æ¨™ãŒ2ã‚ˆã‚Šå·¦ã«ãªã‚‹ã¨1åº¦ã ã‘å¼¾ã‚’ç™ºå°„
+        //xÀ•W‚ª2‚æ‚è¶‚É‚È‚é‚Æ1“x‚¾‚¯’e‚ğ”­Ë
         if ((transform.position.x <= 2.0f) && (attackFlag == true))
         {
             GameObject go = Instantiate(enemyballPrefab);
             float octopusYPosition = transform.position.y;
             go.transform.position = new Vector3(1.5f, octopusYPosition, 0);
+            go.GetComponent<EBallController>().SpeedController(this.level);
             attackFlag = false;
-            //åŠ¹æœéŸ³
+            //Œø‰Ê‰¹
             seAudioSource.PlayOneShot(attackSE);
         }
+    }
+
+    //Œo‰ßŠÔ‚É‰‚¶‚ÄˆÚ“®ƒXƒs[ƒhƒAƒbƒv
+    public void SpeedController(int level)
+    {
+        this.level = level;
     }
 }

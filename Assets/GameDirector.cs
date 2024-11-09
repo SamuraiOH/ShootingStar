@@ -10,9 +10,11 @@ public class GameDirector : MonoBehaviour
 {
     public static int score; //得点
     public static int life; //ライフ
-    float time = 0; //得点加算用の時間（0.1秒につき1点)
+    float time; //得点加算用の時間
+    float addScoreTime; //得点加算のインターバル(最初は0.1秒)
     GameObject scoreText; //得点表示UIオブジェクト
     GameObject lifeUI;//体力表示UIオブジェクト
+    int level; //ゲームのレベル(得点に影響)
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +24,9 @@ public class GameDirector : MonoBehaviour
         //変数の初期化
         score = 0;
         life = 3;
+        this.time = 0;
+        this.addScoreTime = 0.1f;
+        this.level = 0;
     }
 
     // Update is called once per frame
@@ -35,7 +40,7 @@ public class GameDirector : MonoBehaviour
         this.time += Time.deltaTime; //時間計測
 
         //時間が0.1秒になったら時間をリセットして得点加算
-        if ((this.time >= 0.1f) && (score < 9999999))
+        if ((this.time >= this.addScoreTime * (1.0f - (float)this.level * 0.15f)) && (score < 9999999))
         {
             score++;
             this.time = 0;
@@ -75,5 +80,11 @@ public class GameDirector : MonoBehaviour
             //ライフUIの操作
             this.lifeUI.GetComponent<Image>().fillAmount = (float)(life) / 5;
         }
+    }
+
+    //レベルアップ処理
+    public void LevelUp()
+    {
+        this.level++;
     }
 }

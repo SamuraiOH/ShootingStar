@@ -31,6 +31,13 @@ public class EnemyGenerator : MonoBehaviour
     //敵の出現パターン
     int pattern;
 
+    //ゲームのレベル(敵のスピードや出現頻度、得点に影響)
+    int level;
+    //ゲームのレベル上限
+    int maxLevel;
+    //レベルアップフラグ
+    bool levelUpFlag;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +54,11 @@ public class EnemyGenerator : MonoBehaviour
 
         //開始から75sまでパターン0
         this.pattern = 0;
+
+        //敵のスピードレベル関連
+        this.level = 0;
+        this.maxLevel = 5;
+        this.levelUpFlag = true;
     }
 
     // Update is called once per frame
@@ -72,6 +84,8 @@ public class EnemyGenerator : MonoBehaviour
             {
                 //一周したらパターン4の最初に移行
                 this.gameTime -= 250.0f;
+                //敵スピードアップフラグ起動
+                this.levelUpFlag = true;
             }
             else if (this.gameTime >= 550.0f)
             {
@@ -81,10 +95,10 @@ public class EnemyGenerator : MonoBehaviour
                 this.stoneFlag = true;
                 this.squidFlag = true;
 
-                this.fishSpan = 1.25f;
-                this.octopusSpan = 1.75f;
-                this.stoneSpan = 2.5f;
-                this.squidSpan = 2.5f;
+                this.fishSpan = 1.25f * (1.0f - 0.05f * (float)this.level);
+                this.octopusSpan = 1.75f * (1.0f - 0.05f * (float)this.level);
+                this.stoneSpan = 2.5f * (1.0f - 0.05f * (float)this.level);
+                this.squidSpan = 2.5f * (1.0f - 0.05f * (float)this.level);
             }
             else if (this.gameTime >= 500.0f)
             {
@@ -94,9 +108,9 @@ public class EnemyGenerator : MonoBehaviour
                 this.stoneFlag = true;
                 this.squidFlag = true;
 
-                this.octopusSpan = 1.6f;
-                this.stoneSpan = 2.25f;
-                this.squidSpan = 2.4f;
+                this.octopusSpan = 1.6f * (1.0f - 0.05f * (float)this.level);
+                this.stoneSpan = 2.25f * (1.0f - 0.05f * (float)this.level);
+                this.squidSpan = 2.4f * (1.0f - 0.05f * (float)this.level);
             }
             else if (this.gameTime >= 450.0f)
             {
@@ -106,9 +120,9 @@ public class EnemyGenerator : MonoBehaviour
                 this.stoneFlag = false;
                 this.squidFlag = true;
 
-                this.fishSpan = 1.15f;
-                this.octopusSpan = 1.7f;
-                this.squidSpan = 2.25f;
+                this.fishSpan = 1.15f * (1.0f - 0.05f * (float)this.level);
+                this.octopusSpan = 1.7f * (1.0f - 0.05f * (float)this.level);
+                this.squidSpan = 2.25f * (1.0f - 0.05f * (float)this.level);
             }
             else if (this.gameTime >= 400.0f)
             {
@@ -118,21 +132,29 @@ public class EnemyGenerator : MonoBehaviour
                 this.stoneFlag = true;
                 this.squidFlag = true;
 
-                this.fishSpan = 1.15f;
-                this.stoneSpan = 2.3f;
-                this.squidSpan = 2.35f;
+                this.fishSpan = 1.15f * (1.0f - 0.05f * (float)this.level);
+                this.stoneSpan = 2.3f * (1.0f - 0.05f * (float)this.level);
+                this.squidSpan = 2.35f * (1.0f - 0.05f * (float)this.level);
             }
             else if (this.gameTime >= 350.0f)
             {
+                //敵のスピードレベルアップ
+                if (this.levelUpFlag && (this.level < this.maxLevel))
+                {
+                    this.level++;
+                    this.levelUpFlag = false;
+                    GameObject director = GameObject.Find("GameDirector");
+                    director.GetComponent<GameDirector>().LevelUp();
+                }
                 //350～400sまでイカ以外が出現
                 this.fishFlag = true;
                 this.octopusFlag = true;
                 this.stoneFlag = true;
                 this.squidFlag = false;
 
-                this.fishSpan = 1.15f;
-                this.octopusSpan = 1.6f;
-                this.stoneSpan = 2.3f;
+                this.fishSpan = 1.15f * (1.0f - 0.05f * (float)this.level);
+                this.octopusSpan = 1.6f * (1.0f - 0.05f * (float)this.level);
+                this.stoneSpan = 2.3f * (1.0f - 0.05f * (float)this.level);
             }
         }
         else if (this.gameTime >= 250.0f)
@@ -164,45 +186,49 @@ public class EnemyGenerator : MonoBehaviour
             this.squidDelta += Time.deltaTime;
 
             //ピラニア出現
-            if ((this.fishDelta >= this.fishSpan) && fishFlag)
+            if ((this.fishDelta >= this.fishSpan) && this.fishFlag)
             {
                 this.fishDelta = 0;
-                GameObject goFish = Instantiate(fishPrefab);
+                GameObject goFish = Instantiate(this.fishPrefab);
                 int x = Random.Range(0, 2);
                 float px = 4.0f + x;
                 int y = Random.Range(-15, 16);
                 float py = y / 3;
                 goFish.transform.position = new Vector3(px, py, 0);
+                goFish.GetComponent<FishController>().SpeedController(this.level);
             }
 
             //タコ出現
-            if ((this.octopusDelta >= this.octopusSpan) && octopusFlag)
+            if ((this.octopusDelta >= this.octopusSpan) && this.octopusFlag)
             {
                 this.octopusDelta = 0;
-                GameObject goOctopus = Instantiate(octopusPrefab);
+                GameObject goOctopus = Instantiate(this.octopusPrefab);
                 int y = Random.Range(-15, 16);
                 float py = y / 3;
                 goOctopus.transform.position = new Vector3(3.0f, py, 0);
+                goOctopus.GetComponent<OctopusController>().SpeedController(this.level);
             }
 
             //隕石出現
-            if ((this.stoneDelta >= this.stoneSpan) && stoneFlag)
+            if ((this.stoneDelta >= this.stoneSpan) && this.stoneFlag)
             {
                 this.stoneDelta = 0;
-                GameObject goStone = Instantiate(stonePrefab);
+                GameObject goStone = Instantiate(this.stonePrefab);
                 int x = Random.Range(0, 10);
                 float px = x;
                 goStone.transform.position = new Vector3(px, 6.0f, 0);
+                goStone.GetComponent<StoneController>().SpeedController(this.level);
             }
 
             //イカ出現
-            if ((this.squidDelta >= this.squidSpan) && squidFlag)
+            if ((this.squidDelta >= this.squidSpan) && this.squidFlag)
             {
                 this.squidDelta = 0;
-                GameObject goSquid = Instantiate(squidPrefab);
+                GameObject goSquid = Instantiate(this.squidPrefab);
                 int y = Random.Range(-15, 16);
                 float py = y / 3;
                 goSquid.transform.position = new Vector3(3.0f, py, 0);
+                goSquid.GetComponent<SquidController>().SpeedController(this.level);
             }
         }
         else if (this.pattern == 3) //パターン3の場合
@@ -221,42 +247,46 @@ public class EnemyGenerator : MonoBehaviour
             if (this.fishDelta >= this.fishSpan)
             {
                 this.fishDelta = 0;
-                GameObject goFish = Instantiate(fishPrefab);
+                GameObject goFish = Instantiate(this.fishPrefab);
                 int x = Random.Range(0, 2);
                 float px = 4.0f + x;
                 int y = Random.Range(-15, 16);
                 float py = y / 3;
                 goFish.transform.position = new Vector3(px, py, 0);
+                goFish.GetComponent<FishController>().SpeedController(this.level);
             }
 
             //タコ出現
             if (this.octopusDelta >= this.octopusSpan)
             {
                 this.octopusDelta = 0;
-                GameObject goOctopus = Instantiate(octopusPrefab);
+                GameObject goOctopus = Instantiate(this.octopusPrefab);
                 int y = Random.Range(-15, 16);
                 float py = y / 3;
                 goOctopus.transform.position = new Vector3(3.0f, py, 0);
+                goOctopus.GetComponent<OctopusController>().SpeedController(this.level);
             }
 
             //隕石出現
             if (this.stoneDelta >= this.stoneSpan)
             {
                 this.stoneDelta = 0;
-                GameObject goStone = Instantiate(stonePrefab);
+                GameObject goStone = Instantiate(this.stonePrefab);
                 int x = Random.Range(0, 10);
                 float px = x;
                 goStone.transform.position = new Vector3(px, 6.0f, 0);
+                goStone.GetComponent<StoneController>().SpeedController(this.level);
             }
 
             //イカ出現
             if (this.squidDelta >= this.squidSpan)
             {
                 this.squidDelta = 0;
-                GameObject goSquid = Instantiate(squidPrefab);
+                GameObject goSquid = Instantiate(this.squidPrefab);
                 int y = Random.Range(-15, 16);
                 float py = y / 3;
                 goSquid.transform.position = new Vector3(3.0f, py, 0);
+                goSquid.GetComponent<SquidController>().SpeedController(this.level);
             }
         }
         else if(this.pattern == 2) //パターン2の場合
@@ -273,32 +303,35 @@ public class EnemyGenerator : MonoBehaviour
             if (this.fishDelta >= this.fishSpan)
             {
                 this.fishDelta = 0;
-                GameObject goFish = Instantiate(fishPrefab);
+                GameObject goFish = Instantiate(this.fishPrefab);
                 int x = Random.Range(0, 2);
                 float px = 4.0f + x;
                 int y = Random.Range(-15, 16);
                 float py = y / 3;
                 goFish.transform.position = new Vector3(px, py, 0);
+                goFish.GetComponent<FishController>().SpeedController(this.level);
             }
 
             //タコ出現
             if (this.octopusDelta >= this.octopusSpan)
             {
                 this.octopusDelta = 0;
-                GameObject goOctopus = Instantiate(octopusPrefab);
+                GameObject goOctopus = Instantiate(this.octopusPrefab);
                 int y = Random.Range(-15, 16);
                 float py = y / 3;
                 goOctopus.transform.position = new Vector3(3.0f, py, 0);
+                goOctopus.GetComponent<OctopusController>().SpeedController(this.level);
             }
 
             //隕石出現
             if (this.stoneDelta >= this.stoneSpan)
             {
                 this.stoneDelta = 0;
-                GameObject goStone = Instantiate(stonePrefab);
+                GameObject goStone = Instantiate(this.stonePrefab);
                 int x = Random.Range(0, 10);
                 float px = x;
                 goStone.transform.position = new Vector3(px, 6.0f, 0);
+                goStone.GetComponent<StoneController>().SpeedController(this.level);
             }
         }
         else if(this.pattern == 1) //パターン1の場合
@@ -313,22 +346,24 @@ public class EnemyGenerator : MonoBehaviour
             if (this.fishDelta >= this.fishSpan)
             {
                 this.fishDelta = 0;
-                GameObject goFish = Instantiate(fishPrefab);
+                GameObject goFish = Instantiate(this.fishPrefab);
                 int x = Random.Range(0, 2);
                 float px = 4.0f + x;
                 int y = Random.Range(-15, 16);
                 float py = y / 3;
                 goFish.transform.position = new Vector3(px, py, 0);
+                goFish.GetComponent<FishController>().SpeedController(this.level);
             }
 
             //隕石出現
             if (this.stoneDelta >= this.stoneSpan)
             {
                 this.stoneDelta = 0;
-                GameObject goStone = Instantiate(stonePrefab);
+                GameObject goStone = Instantiate(this.stonePrefab);
                 int x = Random.Range(0, 10);
                 float px = x;
                 goStone.transform.position = new Vector3(px, 6.0f, 0);
+                goStone.GetComponent<StoneController>().SpeedController(this.level);
             }
         }
         else //パターン0の場合
@@ -340,12 +375,13 @@ public class EnemyGenerator : MonoBehaviour
             if (this.fishDelta >= this.fishSpan)
             {
                 this.fishDelta = 0;
-                GameObject goFish = Instantiate(fishPrefab);
+                GameObject goFish = Instantiate(this.fishPrefab);
                 int x = Random.Range(-1, 2);
                 float px = 3.5f + (x / 2);
                 int y = Random.Range(-15, 16);
                 float py = y / 3;
                 goFish.transform.position = new Vector3(px, py, 0);
+                goFish.GetComponent<FishController>().SpeedController(this.level);
             }
         }
     }

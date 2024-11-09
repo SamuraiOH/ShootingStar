@@ -8,12 +8,16 @@ using System;
 public class SquidController : MonoBehaviour
 {
     float squidSpeed; //左への移動スピード
+    float incSquidSpeed; //左への移動スピードの上がり幅
     int angle; //サインカーブに基づく上下運動のための角度
+    int level; //ゲームのレベル(スピードに影響)
 
     // Start is called before the first frame update
     void Start()
     {
         this.squidSpeed = -0.04f;
+        this.incSquidSpeed = this.squidSpeed * 0.1f;
+        this.squidSpeed += (float)this.level * this.incSquidSpeed;
         this.angle = 0;
     }
 
@@ -25,7 +29,7 @@ public class SquidController : MonoBehaviour
             return;
         }
 
-        //x方向は一定のスピード（背景と同じ）で移動
+        //x方向は一定のスピードで移動
         //y方向には上下に振動するように移動（サインカーブを描く）
         transform.Translate(this.squidSpeed, (float)(1.5f * (Math.Sin((angle + 2) * Math.PI / 180) - Math.Sin(angle * Math.PI / 180))), 0);
         //画面を通過したら消滅
@@ -39,5 +43,11 @@ public class SquidController : MonoBehaviour
             angle = 0;
         }
         angle += 2;
+    }
+
+    //経過時間に応じて移動スピードアップ
+    public void SpeedController(int level)
+    {
+        this.level = level;
     }
 }
