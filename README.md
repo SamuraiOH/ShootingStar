@@ -21,7 +21,7 @@ Unityの個人製作(Android)
   過去の最高得点上位3位。(アプリごとにローカルで記録)
 
 ### 説明画面
-<img src="https://github.com/SamuraiOH/ShootingStar/assets/92005492/ee5faa84-b225-4ccb-9da5-38b92d109cd1" width="25%" />   
+<img src="https://github.com/user-attachments/assets/8832067b-d6c5-4c8b-a5ce-db8ce12d401f" width="25%" />   
 
 ゲーム説明時の画面。タップするとタイトル画面に戻ります。  
 
