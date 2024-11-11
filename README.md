@@ -38,7 +38,7 @@ Unityの個人製作(Android)
 - スコア  
 ![score](https://github.com/SamuraiOH/ShootingStar/assets/92005492/4ee7286c-f8d7-43c8-b7bc-e8e41750a984)
 
-  プレイヤーの得点。基本的に0.1秒に1点加算されます。
+  プレイヤーの得点。基本的に0.1秒に1点加算されます。（敵のスピードに合わせて得点の上昇スピードは上がっていきます。）
   
 - ライフ  
 ![life](https://github.com/SamuraiOH/ShootingStar/assets/92005492/e9c555cd-7cbd-4e5e-9375-22830f8ca649)
@@ -51,6 +51,8 @@ Unityの個人製作(Android)
   タップするとポーズ画面に移行し、ゲームが一時停止されます。  
 
 ### 障害物
+　ゲームを進めていくと時の移動スピードが少しずつ速くなっていきます。
+ 
 - ピラニア  
 ![fish](https://github.com/SamuraiOH/ShootingStar/assets/92005492/ad583521-a7f1-48cb-adb0-4aaaa59a53e9)
 
